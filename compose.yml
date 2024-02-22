@@ -1,0 +1,39 @@
+services:
+
+  waf:
+    image: haproxy:lts-alpine
+    volumes:
+      - ./waf:/usr/local/etc/haproxy:ro
+    ports:
+      - 8100:8080
+      - 8150:9090
+    depends_on:
+      web:
+        condition: service_started
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 8200:80
+    depends_on:
+      tier1:
+        condition: service_started
+
+  tier1:
+    build:
+      context: ./tier1
+      dockerfile: Dockerfile
+    ports:
+      - 8300:8080
+    depends_on:
+      tier2:
+        condition: service_started
+
+  tier2:
+    build:
+      context: ./tier2
+      dockerfile: Dockerfile
+    ports:
+      - 8400:8080
