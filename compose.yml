@@ -67,7 +67,6 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: test
       RABBITMQ_DEFAULT_PASS: test
-      RABBITMQ_DEFAULT_VHOST: test
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics" ,"-q", "ping"]
       timeout: 10s

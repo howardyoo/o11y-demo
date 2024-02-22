@@ -46,7 +46,7 @@ def do_saas(ctx):
     if new_new > 90:
         time.sleep(1.5)
     resp = requests.get("https://www.githubstatus.com/api/v2/summary.json")
-    data = resp.json()
+    resp.json()
 
 @app.route("/fast")
 def fast():
