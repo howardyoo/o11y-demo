@@ -7,14 +7,15 @@ app = Flask(__name__)
 with connect(
     host="db",
     user="test",
-    password="test"
+    password="test",
+    db="test",
 ) as DB:
     pass
 
 def query_db():
     with DB.cursor() as cursor:
         cursor.execute("SELECT * FROM test")
-        result = cursor.fetchall()
+        cursor.fetchall()
 
 @app.route("/")
 def default():
