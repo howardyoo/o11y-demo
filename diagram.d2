@@ -1,0 +1,27 @@
+waf: Vendor WAF {
+  style: {font-color: red}
+}
+
+web: Hosted Web Hosts
+
+t1: Tier 1 App
+
+t2: Tier 2 App
+
+db: Vendor DB {
+  style: {font-color: red}
+}
+
+q: Vendor Queue {
+  style: {font-color: purple}
+}
+
+s: Vendor SaaS {
+  style: {font-color: red}
+}
+
+waf -> web -> t1 -> t2 -> db
+
+t1 -> q
+
+t1 -> s

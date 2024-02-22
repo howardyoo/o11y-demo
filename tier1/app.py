@@ -15,19 +15,19 @@ QCONN = pika.BlockingConnection(
   )
 QCHAN = QCONN.channel()
 
-def do_fast():
+def do_tier2_fast():
     print("called fast function")
     resp = requests.get("http://tier2:8080")
     return f"tier 1 fast :: {resp.text}"
 
-def do_slow():
+def do_tier2_slow():
     print("called slow function")
     time.sleep(1.5)
     resp = requests.get("http://tier2:8080")
     return f"tier 1 slow :: {resp.text}"
 
 def do_queue(ctx):
-    print("called queue function")
+    print(f"called queue function w/ {ctx}")
     num = random.random()
     new_new = num * 100
     if new_new > 90:
@@ -39,12 +39,23 @@ def do_queue(ctx):
         body=f"{ctx} {time.time()}"
     )
 
+def do_saas(ctx):
+    print(f"called saas function w/ {ctx}")
+    num = random.random()
+    new_new = num * 100
+    if new_new > 90:
+        time.sleep(1.5)
+    resp = requests.get("https://www.githubstatus.com/api/v2/summary.json")
+    data = resp.json()
+
 @app.route("/fast")
 def fast():
     do_queue("fast")
-    return do_fast()
+    do_saas("fast")
+    return do_tier2_fast()
 
 @app.route("/slow")
 def slow():
     do_queue("slow")
-    return do_slow()
+    do_saas("slow")
+    return do_tier2_slow()
