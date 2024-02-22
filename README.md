@@ -39,7 +39,7 @@
 
 - Insight is costly
 
-## DB
+## Queue
 
 - Vendored Queue
 
