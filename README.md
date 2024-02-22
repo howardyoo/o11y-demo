@@ -1,5 +1,9 @@
 # example app
 
+## Diagram
+
+![diagram](diagram.png "diagram")
+
 ## WAF
 
 - Vendored WAF
@@ -40,7 +44,3 @@
 - Vendored Queue
 
 - Insight possible, just never taken advantage of
-
-## Diagram
-
-![diagram](diagram.png "diagram")
