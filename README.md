@@ -44,3 +44,9 @@
 - Vendored Queue
 
 - Insight possible, just never taken advantage of
+
+## SaaS
+
+- Vendored SaaS (honestly, could be some other internal team with an API)
+
+- Insight not possible, or very limited
