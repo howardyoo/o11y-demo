@@ -4,13 +4,11 @@ from mysql.connector import connect, Error
 
 app = Flask(__name__)
 
-with connect(
-    host="db",
-    user="test",
-    password="test",
-    db="test",
-) as DB:
-    pass
+DB = connect(host="db",
+             user="test",
+             password="test",
+             db="test",
+            )
 
 def query_db():
     with DB.cursor() as cursor:
