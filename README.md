@@ -37,7 +37,7 @@
 
 - Vendored DB
 
-- Insight is costly
+- Insight is costly, so limit use
 
 ## Queue
 
