@@ -18,7 +18,8 @@ QCONN = pika.BlockingConnection(
 QCHAN = QCONN.channel()
 
 def do_tier2():
-    print("called tier2 function")
+    print("this is some important log that is to help troubleshoot when an app goes bad")
+    print("calling tier1 function")
     resp = requests.get("http://tier2:8080")
     return resp.text
 
@@ -32,6 +33,7 @@ def do_tier2_slow():
     return f"tier 1 slow :: {do_tier2()}"
 
 def do_queue(ctx):
+    print(f"this is some important log that is used to gain insight to how well we are doing registering new members")
     print(f"called queue function w/ {ctx}")
     num = random.random()
     new_num = num * 100
@@ -45,6 +47,7 @@ def do_queue(ctx):
     )
 
 def do_saas(ctx):
+    print(f"this is some important log that is used to determine how much we are using this external SaaS")
     print(f"called saas function w/ {ctx}")
     num = random.random()
     new_num = num * 100
