@@ -29,7 +29,7 @@
 
 - 95% Java apps
 
-- Only tier that can access data we store
+- One of 2 tiers that can access data we store
 
 - Critical
 
@@ -44,6 +44,14 @@
 - Vendored Queue
 
 - Insight possible, just never taken advantage of
+
+## Queue Consumer
+
+- 95% Java apps
+
+- Primary tier related to writing new data/events
+
+- Critical
 
 ## SaaS
 
