@@ -71,3 +71,15 @@ services:
       test: ["CMD", "rabbitmq-diagnostics" ,"-q", "ping"]
       timeout: 10s
       retries: 12
+
+  queue_consumer:
+    build:
+      context: ./cons
+      dockerfile: Dockerfile
+    ports:
+      - 8700:80
+    depends_on:
+      queue:
+        condition: service_healthy
+      db:
+        condition: service_healthy

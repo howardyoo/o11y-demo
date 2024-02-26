@@ -20,8 +20,14 @@ s: Vendor SaaS {
   style: {font-color: red}
 }
 
+cons: Queue Consumer
+
 waf -> web -> t1 -> t2 -> db
 
 t1 -> q
 
 t1 -> s
+
+cons -> q
+
+cons -> db

@@ -50,3 +50,57 @@
 - Vendored SaaS (honestly, could be some other internal team with an API)
 
 - Insight not possible, or very limited
+
+# Questions
+
+## ENRICHMENT
+
+- how do we enrich services we own ??
+  - e.g. java app
+
+- how do we enrich services we do NOT own, but have access to underlying APIs ??
+  - e.g. RDS
+
+- how do we enrich services we do NOT own AND have a limited API ??
+  - e.g. imperva WAF
+
+## SERVER MONITORING
+
+- is this a tool that would be a replacement for traditional server monitoring ??
+  - e.g. nagios // USE stats
+
+- IF so, how would that be done ??
+
+## ALERTING
+
+- is there alerting ??
+
+- how is alerting managed ??
+
+- what delivery options are there ??
+  - e.g. email, slack, SMS
+
+## REPORTING
+
+- personal dashboards ??
+
+- shareable, community dashboards ??
+
+- shareable, team only dashboards ??
+
+- CRON report generation and delivery options
+  - e.g. send PDF, via email, once a week to XYZ ??
+
+## RBAC
+
+- is there SSO capabilities ??
+
+- what controls does one have over access to the various components ??
+
+- how are keys created/issued/expired ??
+
+## INFO
+
+- 300+ mil events ingested everyday
+
+- 230+ mil PROD events ingested everyday
