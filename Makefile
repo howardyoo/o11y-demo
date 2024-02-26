@@ -6,6 +6,7 @@ help:
 	@echo "*** curl ***"
 	@echo "make fast		curl fast endpoint"
 	@echo "make slow		curl slow endpoint"
+	@echo "make many		many curls via fast endpoint"
 
 up:
 	@docker compose up --no-deps --build
@@ -15,3 +16,6 @@ fast:
 
 slow:
 	@curl localhost:8100/proxy/slow
+
+many:
+	@watch -n 0.5 make fast
