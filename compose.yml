@@ -1,7 +1,7 @@
 services:
 
   waf:
-    image: haproxy:lts-alpine
+    image: docker.io/library/haproxy:lts-alpine
     volumes:
       - ./waf:/usr/local/etc/haproxy:ro
     ports:
@@ -44,7 +44,7 @@ services:
         condition: service_healthy
 
   db:
-    image: mysql:latest
+    image: docker.io/library/mysql:latest
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     ports:
@@ -60,7 +60,7 @@ services:
       retries: 12
 
   queue:
-    image: rabbitmq:3-management
+    image: docker.io/library/rabbitmq:3-management
     ports:
       - 8600:15672
       - 8650:5672
