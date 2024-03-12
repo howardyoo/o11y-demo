@@ -18,4 +18,4 @@ slow:
 	@curl localhost:8100/proxy/slow
 
 many:
-	@watch -n 0.5 make fast
+	@while true; do curl -m 5 -q localhost:8100/proxy/random &> /dev/null; done
