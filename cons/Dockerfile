@@ -8,4 +8,9 @@ RUN pip3 install -r requirements.txt
 
 COPY app.py .
 
-CMD python3 /app/app.py
+CMD opentelemetry-instrument \
+    --traces_exporter console \
+    --metrics_exporter console \
+    --logs_exporter console \
+    --service_name consumer-service \
+    python3 /app/app.py
