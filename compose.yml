@@ -1,5 +1,25 @@
 services:
 
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.70.0
+    labels:
+      description: "OpenTelemetry collector"
+    environment:
+      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
+    container_name: "otel-collector"
+    command: [--config=/etc/otel-collector-config.yml]
+    volumes:
+      - ./otel-collector/otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - 24317:4317    # OTLP grpc receiver
+      - 24318:4318    # OTLP http receiver
+    depends_on:
+      db:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+
+
   waf:
     image: docker.io/library/haproxy:lts-alpine
     volumes:
@@ -10,6 +30,8 @@ services:
     depends_on:
       web:
         condition: service_started
+      otel-collector:
+        condition: service_started
 
   web:
     build:
@@ -19,6 +41,8 @@ services:
       - 8200:80
     depends_on:
       tier1:
+        condition: service_started
+      otel-collector:
         condition: service_started
 
   tier1:
@@ -40,6 +64,8 @@ services:
         condition: service_started
       queue:
         condition: service_healthy
+      otel-collector:
+        condition: service_started
 
   tier2:
     build:
@@ -58,6 +84,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      otel-collector:
+        condition: service_started
 
   db:
     image: docker.io/library/mysql:latest
@@ -107,3 +135,5 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+      otel-collector:
+        condition: service_started
