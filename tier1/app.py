@@ -4,6 +4,7 @@ import requests
 import random
 import pika
 import sys
+import logging
 
 APP = Flask(__name__)
 
@@ -19,10 +20,13 @@ QCONN = pika.BlockingConnection(
 QCHAN = QCONN.channel()
 QCHAN.queue_declare(queue="test")
 
+log = logging.getLogger(__name__)
+
 def logit(msg):
     """making sure we are printing out to stderr
     so log can be seen while running docker-compose"""
-    print(f"TIER1: {msg}", file=sys.stderr)
+    # print(f"TIER1: {msg}", file=sys.stderr)
+    log.warning(msg)
 
 def go_slow_p():
     """return boolean on whether or something should go slow"""

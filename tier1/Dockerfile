@@ -5,14 +5,10 @@ WORKDIR /app
 COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
-
+RUN opentelemetry-bootstrap --action=install
 COPY app.py .
 
 EXPOSE 8080
 
 CMD opentelemetry-instrument \
-    --traces_exporter console \
-    --metrics_exporter console \
-    --logs_exporter console \
-    --service_name tier1-service \
     flask --app app run -p 8080 -h 0.0.0.0

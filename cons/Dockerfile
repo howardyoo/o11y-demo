@@ -5,12 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
-
+RUN opentelemetry-bootstrap --action=install
 COPY app.py .
 
 CMD opentelemetry-instrument \
-    --traces_exporter console \
-    --metrics_exporter console \
-    --logs_exporter console \
-    --service_name consumer-service \
     python3 /app/app.py

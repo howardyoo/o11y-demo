@@ -1,6 +1,7 @@
 from flask import Flask
 import time
 import sys
+import logging
 from mysql.connector import connect
 
 APP = Flask(__name__)
@@ -11,10 +12,13 @@ DB = connect(host="db",
              db="test",
             )
 
+log = logging.getLogger(__name__)
+
 def logit(msg):
     """making sure we are printing out to stderr
     so log can be seen while running docker-compose"""
-    print(f"TIER2: {msg}", file=sys.stderr)
+    # print(f"TIER2: {msg}", file=sys.stderr)
+    log.warning(msg)
 
 def pure_db_proc(rows):
     """this is attempting to show use of a pure function that

@@ -1,12 +1,4 @@
 flask
 mysql-connector-python
 opentelemetry-distro
-opentelemetry-api
-opentelemetry-sdk
-opentelemetry-instrumentation-asyncio==0.44b0
-opentelemetry-instrumentation-aws-lambda==0.44b0
-opentelemetry-instrumentation-dbapi==0.44b0
-opentelemetry-instrumentation-logging==0.44b0
-opentelemetry-instrumentation-sqlite3==0.44b0
-opentelemetry-instrumentation-urllib==0.44b0
-opentelemetry-instrumentation-wsgi==0.44b0
+opentelemetry-exporter-otlp

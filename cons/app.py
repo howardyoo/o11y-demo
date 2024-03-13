@@ -4,6 +4,7 @@ import pika
 import sys
 import functools
 from mysql.connector import connect
+import logging
 
 QCREDS = pika.PlainCredentials("test","test")
 QCONN = pika.BlockingConnection(
@@ -24,10 +25,13 @@ DB = connect(host="db",
              db="test",
             )
 
+log = logging.getLogger(__name__)
+
 def logit(msg):
     """making sure we are printing out to stderr
     so log can be seen while running docker-compose"""
-    print(f"CONSQUE: {msg}", file=sys.stderr)
+    # print(f"CONSQUE: {msg}", file=sys.stderr)
+    log.warning(msg)
 
 def go_slow_p():
     """return boolean on whether or something should go slow"""

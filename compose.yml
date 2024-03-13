@@ -25,6 +25,14 @@ services:
     build:
       context: ./tier1
       dockerfile: Dockerfile
+    environment:
+      - OTEL_SERVICE_NAME=tier1-service
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
+      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
+      - OTEL_PYTHON_LOG_CORRELATION=true
+      - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
     ports:
       - 8300:8080
     depends_on:
@@ -37,6 +45,14 @@ services:
     build:
       context: ./tier2
       dockerfile: Dockerfile
+    environment:
+      - OTEL_SERVICE_NAME=tier2-service
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
+      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
+      - OTEL_PYTHON_LOG_CORRELATION=true
+      - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
     ports:
       - 8400:8080
     depends_on:
@@ -76,6 +92,14 @@ services:
     build:
       context: ./cons
       dockerfile: Dockerfile
+    environment:
+      - OTEL_SERVICE_NAME=cons-service
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
+      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
+      - OTEL_PYTHON_LOG_CORRELATION=true
+      - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
     ports:
       - 8700:80
     depends_on:
