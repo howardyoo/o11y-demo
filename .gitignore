@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 diagram.svg
+
+# DS store
+.DS_Store
