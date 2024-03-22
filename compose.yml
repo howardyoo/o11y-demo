@@ -13,6 +13,7 @@ services:
     ports:
       - 24317:4317    # OTLP grpc receiver
       - 24318:4318    # OTLP http receiver
+      - 54526:54526   # rsyslog
     depends_on:
       db:
         condition: service_healthy
@@ -34,6 +35,7 @@ services:
         condition: service_started
 
   web:
+    platform: linux/amd64
     build:
       context: ./web
       dockerfile: Dockerfile
@@ -52,7 +54,8 @@ services:
     environment:
       - OTEL_SERVICE_NAME=tier1-service
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_TRACES_EXPORTER=console,otlp_proto_http
+      - OTEL_LOGS_EXPORTER=otlp_proto_http
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
       - OTEL_PYTHON_LOG_CORRELATION=true
@@ -74,7 +77,8 @@ services:
     environment:
       - OTEL_SERVICE_NAME=tier2-service
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_TRACES_EXPORTER=console,otlp_proto_http
+      - OTEL_LOGS_EXPORTER=otlp_proto_http
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
       - OTEL_PYTHON_LOG_CORRELATION=true
@@ -123,7 +127,8 @@ services:
     environment:
       - OTEL_SERVICE_NAME=cons-service
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-      - OTEL_LOGS_EXPORTER=console,otlp_proto_http
+      - OTEL_TRACES_EXPORTER=otlp_proto_http
+      - OTEL_LOGS_EXPORTER=otlp_proto_http
       - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
       - OTEL_PYTHON_LOG_CORRELATION=true
